@@ -1,6 +1,11 @@
 package base;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,6 +14,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.util.Duration;
 
 public class Main extends Application {
     final static String austria = "Austria";
@@ -28,7 +34,9 @@ public class Main extends Application {
                 new BarChart<String,Number>(xAxis,yAxis);
         bc.setTitle("Country Summary");
         xAxis.setLabel("Country");
+        xAxis.setAnimated(false);
         yAxis.setLabel("Value");
+        yAxis.setAnimated(false);
 
         XYChart.Series series1 = new XYChart.Series();
         series1.setName("2003");
@@ -54,9 +62,26 @@ public class Main extends Application {
         series3.getData().add(new XYChart.Data(italy, 17557.31));
         series3.getData().add(new XYChart.Data(usa, 92633.68));
 
-
-        primaryStage.setScene(new Scene(root, 1024, 768));
+        bc.getData().addAll(series1, series2, series3);
+        primaryStage.setScene(new Scene(bc, 1024, 768));
         primaryStage.show();
+
+        Timeline tl = new Timeline();
+        tl.getKeyFrames().add(
+                new KeyFrame(Duration.millis(1000),
+                        new EventHandler<ActionEvent>() {
+                            @Override public void handle(ActionEvent actionEvent) {
+                                for (XYChart.Series<String, Number> series : bc.getData()) {
+                                    for (XYChart.Data<String, Number> data : series.getData()) {
+                                        data.setYValue(Math.random() * 1000);
+                                    }
+                                }
+                            }
+                        }
+                ));
+        tl.setCycleCount(Animation.INDEFINITE);
+        tl.setAutoReverse(true);
+        tl.play();
     }
 
     public static void main(String[] args) {
