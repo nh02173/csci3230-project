@@ -8,15 +8,16 @@ public class Bubble extends Algorithm implements Runnable {
     public Bubble()
     {
         super();
+        FrameRecord.add(super.Basis.clone());
     }
 
     public Bubble(int size, int bound){
         super(size, bound);
+        FrameRecord.add(super.Basis.clone());
     }
 
     @Override
     public void runSimulation() {
-        FrameRecord.add(super.Basis.clone());
         int position, scan;
 
         for (position = super.Basis.length - 1; position >= 0; position--)
@@ -24,7 +25,7 @@ public class Bubble extends Algorithm implements Runnable {
             for (scan = 0; scan <= position - 1; scan++)
             {
                 if (super.Basis[scan].compareTo(super.Basis[scan+1]) > 0) {
-                    super.swap(scan, scan + 1);
+                    super.swap(super.Basis, scan, scan + 1);
                     FrameRecord.add(super.Basis.clone());
                 }
             }

@@ -7,27 +7,29 @@ public class Selection extends Algorithm implements Runnable {
 
     public Selection() {
         super();
+        FrameRecord.add(super.Basis.clone());
     }
 
     public Selection(int size, int bound) {
         super(size, bound);
+        FrameRecord.add(super.Basis.clone());
     }
 
     @Override
     public void runSimulation() {
-
-    }
-
-    public static <T extends Comparable<T>>
-    void selectionSort(T[] data) {
         int min;
-        T temp;
-        for (int index = 0; index < data.length - 1; index++) {
+
+        for (int index = 0; index < super.Basis.length - 1; index++) {
             min = index;
-            for (int scan = index + 1; scan < data.length; scan++)
-                if (data[scan].compareTo(data[min]) < 0)
+
+            for (int scan = index + 1; scan < super.Basis.length; scan++) {
+                if (super.Basis[scan].compareTo(super.Basis[min]) < 0) {
                     min = scan;
-            swap(data, min, index);
+                }
+            }
+
+            super.swap(super.Basis, min, index);
+            FrameRecord.add(super.Basis.clone());
         }
     }
 }

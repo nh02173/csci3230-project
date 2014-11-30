@@ -42,10 +42,10 @@ public abstract class Algorithm {
         return temp.toArray (new Integer [sampleSize]);
     }
 
-    void swap(int start, int finish)
+    public void swap(Integer[] data, int start, int finish)
     {
-        int temp = Basis[start];
-        Basis[start] = Basis[finish];
-        Basis[finish] = temp;
+        int temp = data[start];
+        data[start] = data[finish];
+        data[finish] = temp;
     }
 }

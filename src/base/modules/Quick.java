@@ -7,61 +7,54 @@ public class Quick extends Algorithm implements Runnable {
 
     public Quick() {
         super();
+        FrameRecord.add(super.Basis.clone());
     }
 
     public Quick(int size, int bound) {
         super(size, bound);
+        FrameRecord.add(super.Basis.clone());
     }
 
     @Override
     public void runSimulation() {
-
+        quickSort(0, super.Basis.length - 1);
     }
 
-    public static <T extends Comparable<T>>
-    void quickSort(T[] data) {
-        quickSort(data, 0, data.length - 1);
-    }
-
-    private static <T extends Comparable<T>>
-    void quickSort(T[] data, int min, int max) {
+    private void quickSort(int min, int max) {
         if (min < max) {
             // create partitions
-            int indexofpartition = partition(data, min, max);
+            int partitionIndex = partition(min, max);
             // sort the left partition (lower values)
-            quickSort(data, min, indexofpartition - 1);
+            quickSort(min, partitionIndex - 1);
             // sort the right partition (higher values)
-            quickSort(data, indexofpartition + 1, max);
+            quickSort(partitionIndex + 1, max);
         }
-
     }
 
-    private static <T extends Comparable<T>>
-    int partition(T[] data, int min, int max) {
-        T partitionelement;
+    private int partition(int min, int max) {
+        int partitionElement;
         int left, right;
         int middle = (min + max) / 2;
         // use the middle data value as the partition element
-        partitionelement = data[middle];
+        partitionElement = super.Basis[middle];
         // move it out of the way for now
 
-
-        swap(data, middle, min);
+        super.swap(super.Basis, middle, min);
         left = min;
         right = max;
         while (left < right) {
             // search for an element that is > the partition element
-            while (left < right && data[left].compareTo(partitionelement) <= 0)
+            while (left < right && super.Basis[left].compareTo(partitionElement) <= 0)
                 left++;
             // search for an element that is < the partition element
-            while (data[right].compareTo(partitionelement) > 0)
+            while (super.Basis[right].compareTo(partitionElement) > 0)
                 right--;
             // swap the elements
             if (left < right)
-                swap(data, left, right);
+                super.swap(super.Basis, left, right);
         }
         // move the partition element into place
-        swap(data, min, right);
+        super.swap(super.Basis, min, right);
         return right;
     }
 

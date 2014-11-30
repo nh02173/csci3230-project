@@ -8,10 +8,12 @@ public class Insertion extends Algorithm implements Runnable {
     public Insertion()
     {
         super();
+        FrameRecord.add(super.Basis.clone());
     }
 
     public Insertion(int size, int bound){
         super(size, bound);
+        FrameRecord.add(super.Basis.clone());
     }
 
     @Override
@@ -22,10 +24,10 @@ public class Insertion extends Algorithm implements Runnable {
             // shift larger values to the right
             while (position > 0 && super.Basis[position - 1].compareTo(key) > 0) {
                 super.Basis[position] = super.Basis[position - 1];
+                FrameRecord.add(super.Basis.clone());
                 position--;
             }
             super.Basis[position] = key;
-
         }
     }
 }
