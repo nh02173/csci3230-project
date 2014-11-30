@@ -9,27 +9,33 @@ public abstract class Algorithm {
     public static final int DEFAULT_BOUND = 100;
     public static final int MINIMUM_BOUND = 10;
 
-    public Integer[]Basis;
+    public Integer[] Basis;
+    public ArrayList<Integer[]> FrameRecord;
+    public String Name;
 
-    public Algorithm(Integer[] input) {
+    public Algorithm(Integer[] input, String name) {
         if (input.length >= MINIMUM_SIZE) {
             Basis = input;
         } else {
             throw new IllegalArgumentException("Invalid input size, >= " + MINIMUM_BOUND + " is required");
         }
+
+        this.Name = name;
     }
 
-    public Algorithm(int sampleSize, int bound) {
+    public Algorithm(int sampleSize, int bound, String name) {
         if (sampleSize >= MINIMUM_SIZE &&
                 bound >= MINIMUM_BOUND) {
             Basis = getSample(sampleSize, bound);
         } else {
             Basis = getSample(DEFAULT_SIZE, DEFAULT_BOUND);
         }
+
+        this.Name = name;
     }
 
-    public Algorithm(){
-        this(DEFAULT_SIZE, DEFAULT_BOUND);
+    public Algorithm(String name) {
+        this(DEFAULT_SIZE, DEFAULT_BOUND, name);
     }
 
     private Integer[] getSample(int sampleSize, int bound) {
@@ -39,13 +45,18 @@ public abstract class Algorithm {
         for (int index = 0; index < sampleSize; index++) {
             temp.add(gen.nextInt(bound));
         }
-        return temp.toArray (new Integer [sampleSize]);
+        return temp.toArray(new Integer[sampleSize]);
     }
 
-    public void swap(Integer[] data, int start, int finish)
-    {
+    public void swap(Integer[] data, int start, int finish) {
         int temp = data[start];
         data[start] = data[finish];
         data[finish] = temp;
     }
+
+    @Override
+    public String toString() {
+        return this.Name;
+    }
+
 }

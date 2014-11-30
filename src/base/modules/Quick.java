@@ -1,18 +1,15 @@
 package base.modules;
 
-import java.util.Queue;
-
 public class Quick extends Algorithm implements Runnable {
-    public Queue<Integer[]> FrameRecord;
 
     public Quick() {
-        super();
-        FrameRecord.add(super.Basis.clone());
+        super("Quick Sort");
+        super.FrameRecord.add(super.Basis.clone());
     }
 
-    public Quick(int size, int bound) {
-        super(size, bound);
-        FrameRecord.add(super.Basis.clone());
+    public Quick(Number size, Number bound) {
+        super(size.intValue(), bound.intValue(), "Quick Sort");
+        super.FrameRecord.add(super.Basis.clone());
     }
 
     @Override
@@ -38,8 +35,8 @@ public class Quick extends Algorithm implements Runnable {
         // use the middle data value as the partition element
         partitionElement = super.Basis[middle];
         // move it out of the way for now
-
         super.swap(super.Basis, middle, min);
+        super.FrameRecord.add(super.Basis.clone());
         left = min;
         right = max;
         while (left < right) {
@@ -50,11 +47,14 @@ public class Quick extends Algorithm implements Runnable {
             while (super.Basis[right].compareTo(partitionElement) > 0)
                 right--;
             // swap the elements
-            if (left < right)
+            if (left < right) {
                 super.swap(super.Basis, left, right);
+                super.FrameRecord.add(super.Basis.clone());
+            }
         }
         // move the partition element into place
         super.swap(super.Basis, min, right);
+        super.FrameRecord.add(super.Basis.clone());
         return right;
     }
 

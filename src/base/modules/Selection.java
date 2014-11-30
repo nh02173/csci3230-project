@@ -1,18 +1,15 @@
 package base.modules;
 
-import java.util.Queue;
-
 public class Selection extends Algorithm implements Runnable {
-    public Queue<Integer[]> FrameRecord;
 
     public Selection() {
-        super();
-        FrameRecord.add(super.Basis.clone());
+        super("Selection Sort");
+        super.FrameRecord.add(super.Basis.clone());
     }
 
-    public Selection(int size, int bound) {
-        super(size, bound);
-        FrameRecord.add(super.Basis.clone());
+    public Selection(Number size, Number bound) {
+        super(size.intValue(), bound.intValue(), "Selection Sort");
+        super.FrameRecord.add(super.Basis.clone());
     }
 
     @Override
@@ -29,7 +26,7 @@ public class Selection extends Algorithm implements Runnable {
             }
 
             super.swap(super.Basis, min, index);
-            FrameRecord.add(super.Basis.clone());
+            super.FrameRecord.add(super.Basis.clone());
         }
     }
 }

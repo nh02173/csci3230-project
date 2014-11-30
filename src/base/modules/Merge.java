@@ -1,18 +1,15 @@
 package base.modules;
 
-import java.util.Queue;
-
 public class Merge extends Algorithm implements Runnable {
-    public Queue<Integer[]> FrameRecord;
 
     public Merge() {
-        super();
-        FrameRecord.add(super.Basis.clone());
+        super("Merge Sort");
+        super.FrameRecord.add(super.Basis.clone());
     }
 
-    public Merge(int size, int bound) {
-        super(size, bound);
-        FrameRecord.add(super.Basis.clone());
+    public Merge(Number size, Number bound) {
+        super(size.intValue(), bound.intValue(), "Merge Sort");
+        super.FrameRecord.add(super.Basis.clone());
     }
 
     @Override
@@ -61,7 +58,7 @@ public class Merge extends Algorithm implements Runnable {
         // Copy merged data into original array
         for (index = first; index <= last; index++) {
             super.Basis[index] = temp[index];
-            FrameRecord.add(super.Basis.clone());
+            super.FrameRecord.add(super.Basis.clone());
         }
     }
 }
