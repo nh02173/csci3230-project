@@ -10,12 +10,12 @@ public abstract class Algorithm {
     public static final int MINIMUM_BOUND = 10;
 
     public Integer[] Basis;
-    public ArrayList<Integer[]> FrameRecord;
+    public ArrayList<Integer[]> FrameRecord = new ArrayList<>();
     public String Name;
 
     public Algorithm(Integer[] input, String name) {
         if (input.length >= MINIMUM_SIZE) {
-            Basis = input;
+            this.Basis = input;
         } else {
             throw new IllegalArgumentException("Invalid input size, >= " + MINIMUM_BOUND + " is required");
         }
@@ -24,11 +24,12 @@ public abstract class Algorithm {
     }
 
     public Algorithm(int sampleSize, int bound, String name) {
+        System.out.println("Got Size: " + sampleSize + " Got Bound: " + bound);
         if (sampleSize >= MINIMUM_SIZE &&
                 bound >= MINIMUM_BOUND) {
-            Basis = getSample(sampleSize, bound);
+            this.Basis = getSample(sampleSize, bound);
         } else {
-            Basis = getSample(DEFAULT_SIZE, DEFAULT_BOUND);
+            this.Basis = getSample(DEFAULT_SIZE, DEFAULT_BOUND);
         }
 
         this.Name = name;
@@ -40,7 +41,7 @@ public abstract class Algorithm {
 
     private Integer[] getSample(int sampleSize, int bound) {
         Random gen = new Random();
-        ArrayList<Integer> temp = new ArrayList<Integer>(sampleSize);
+        ArrayList<Integer> temp = new ArrayList<>(sampleSize);
 
         for (int index = 0; index < sampleSize; index++) {
             temp.add(gen.nextInt(bound));

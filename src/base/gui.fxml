@@ -11,7 +11,7 @@
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 
-<GridPane alignment="center" hgap="10" prefHeight="768.0" prefWidth="1231.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="base.Controller">
+<GridPane alignment="center" hgap="10" prefHeight="768.0" prefWidth="1024.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="base.Controller">
     <columnConstraints>
         <ColumnConstraints />
         <ColumnConstraints />
@@ -20,11 +20,11 @@
         <RowConstraints />
     </rowConstraints>
     <children>
-        <SplitPane prefHeight="160.0" prefWidth="200.0" GridPane.columnIndex="1">
+        <SplitPane prefHeight="768.0" prefWidth="417.0" GridPane.columnIndex="1">
             <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="766.0" prefWidth="0.0">
                     <children>
-                        <ComboBox fx:id="algoComboBox" layoutX="24.0" layoutY="111.0" prefWidth="150.0" promptText="Select an algorithm" visibleRowCount="6">
+                        <ComboBox fx:id="algoComboBox" layoutX="25.0" layoutY="200.0" prefWidth="150.0" promptText="Select an algorithm" visibleRowCount="6">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
                                     <String fx:value="Selection Sort" />
@@ -35,59 +35,64 @@
                                 </FXCollections>
                             </items>
                         </ComboBox>
-                        <Label layoutX="24.0" layoutY="69.0" text="Sort Algorithm">
+                        <Label layoutX="25.0" layoutY="158.0" text="Sort Algorithm">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label layoutX="24.0" layoutY="166.0" text="Sample Set Size">
+                        <Label layoutX="25.0" layoutY="255.0" text="Sample Set Size">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Slider fx:id="sampleSizeSlider" layoutX="29.0" layoutY="208.0" majorTickUnit="10.0" min="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="10.0" />
-                        <Slider fx:id="sampleBoundSlider" layoutX="30.0" layoutY="322.0" majorTickUnit="10.0" min="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="10.0" />
-                        <Label layoutX="24.0" layoutY="280.0" text="Randomization Bound">
+                        <Slider fx:id="sampleSizeSlider" layoutX="30.0" layoutY="297.0" majorTickUnit="10.0" max="50.0" min="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="10.0" />
+                        <Slider fx:id="sampleBoundSlider" layoutX="31.0" layoutY="411.0" majorTickUnit="10.0" min="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="10.0" />
+                        <Label layoutX="25.0" layoutY="369.0" text="Randomization Bound">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Button fx:id="generateButton" layoutX="100.0" layoutY="383.0" mnemonicParsing="false" onAction="#generateButtonClicked" onMouseClicked="#generateButtonClicked" text="Generate">
+                        <Button fx:id="generateButton" layoutX="101.0" layoutY="472.0" mnemonicParsing="false" onAction="#generateButtonClicked" text="Generate">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Button>
-                        <Button fx:id="resetButton" layoutX="24.0" layoutY="383.0" mnemonicParsing="false" onAction="#resetButtonClicked" onMouseClicked="#resetButtonClicked" text="Reset">
+                        <Button fx:id="resetButton" layoutX="25.0" layoutY="472.0" mnemonicParsing="false" onAction="#resetButtonClicked" text="Reset">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Button>
+                  <Label fx:id="messageLabel1" alignment="CENTER" layoutX="30.0" layoutY="521.0" prefHeight="17.0" prefWidth="138.0" textAlignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                     </children>
                 </AnchorPane>
             </items>
         </SplitPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="1024.0">
             <children>
-                <BarChart fx:id="simulationChart" layoutX="25.0" layoutY="40.0" prefHeight="646.0" prefWidth="973.0">
+                <BarChart fx:id="simulationChart" layoutX="27.0" layoutY="20.0" prefHeight="634.0" prefWidth="755.0">
                     <xAxis>
-                        <CategoryAxis side="BOTTOM" />
+                        <CategoryAxis prefHeight="25.0" prefWidth="698.0" side="BOTTOM" />
                     </xAxis>
                     <yAxis>
                         <NumberAxis side="LEFT" />
                     </yAxis>
                 </BarChart>
-                <ProgressBar fx:id="frameProgressBar" layoutX="213.0" layoutY="687.0" prefHeight="18.0" prefWidth="599.0" progress="0.0" />
-                <Button fx:id="previousButton" layoutX="173.0" layoutY="680.0" mnemonicParsing="false" onAction="#previousButtonClicked" onMouseClicked="#previousButtonClicked" text="&lt;">
+                <ProgressBar fx:id="frameProgressBar" layoutX="105.0" layoutY="679.0" prefHeight="18.0" prefWidth="599.0" progress="0.0" />
+                <Button fx:id="previousButton" layoutX="65.0" layoutY="672.0" mnemonicParsing="false" onAction="#previousButtonClicked" text="&lt;">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Button>
-                <Button fx:id="nextButton" layoutX="824.0" layoutY="680.0" mnemonicParsing="false" onAction="#nextButtonClicked" onMouseClicked="#nextButtonClicked" text="&gt;">
+                <Button fx:id="nextButton" layoutX="716.0" layoutY="672.0" mnemonicParsing="false" onAction="#nextButtonClicked" text="&gt;">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Button>
-                <Label fx:id="messageLabel" alignment="CENTER" layoutX="213.0" layoutY="727.0" prefHeight="17.0" prefWidth="599.0" text="Ready To Start" textAlignment="CENTER">
+                <Label fx:id="messageLabel2" alignment="CENTER" layoutX="106.0" layoutY="717.0" prefHeight="17.0" prefWidth="599.0" text="Ready For Data" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Label>
