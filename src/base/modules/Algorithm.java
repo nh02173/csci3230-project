@@ -45,7 +45,9 @@ public abstract class Algorithm {
 
         for (int index = 0; index < sampleSize; index++) {
             int check = gen.nextInt(bound);
-            if(check == 0){check++;}
+            if (check == 0) {
+                check++;
+            }
             temp.add(check);
         }
         return temp.toArray(new Integer[sampleSize]);
