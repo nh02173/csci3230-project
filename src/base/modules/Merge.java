@@ -27,7 +27,7 @@ public class Merge extends Algorithm implements Runnable {
     }
 
     private void merge(int first, int mid, int last) {
-        Integer[] temp = (Integer[]) (new Comparable[super.Basis.length]);
+        Integer[] temp = super.Basis;
         int first1 = first, last1 = mid; // endpoints of first subarray
         int first2 = mid + 1, last2 = last; // endpoints of second subarray
         int index = first1; // next index open in temp array

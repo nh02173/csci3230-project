@@ -5,7 +5,7 @@ import java.util.Random;
 
 public abstract class Algorithm {
     public static final int DEFAULT_SIZE = 10;
-    public static final int MINIMUM_SIZE = 10;
+    public static final int MINIMUM_SIZE = 5;
     public static final int DEFAULT_BOUND = 100;
     public static final int MINIMUM_BOUND = 10;
 
@@ -44,7 +44,9 @@ public abstract class Algorithm {
         ArrayList<Integer> temp = new ArrayList<>(sampleSize);
 
         for (int index = 0; index < sampleSize; index++) {
-            temp.add(gen.nextInt(bound));
+            int check = gen.nextInt(bound);
+            if(check == 0){check++;}
+            temp.add(check);
         }
         return temp.toArray(new Integer[sampleSize]);
     }

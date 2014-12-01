@@ -6,8 +6,6 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
@@ -37,9 +35,9 @@ public class Controller implements Initializable {
     @FXML
     public Button nextButton;
     @FXML
-    public Label messageLabel1;
+    public Label statusLabel;
     @FXML
-    public Label messageLabel2;
+    public Label messageLabel;
 
     private Integer[] frameBuffer;
     private Algorithm simulation;
@@ -54,16 +52,16 @@ public class Controller implements Initializable {
     public void generateButtonClicked(Event event) {
         if (StringUtils.isEmpty(algoComboBox.getSelectionModel().getSelectedItem())) {
             // Bad input
-            messageLabel1.setTextFill(Color.RED);
-            messageLabel1.setText("Select an algorithm");
+            statusLabel.setTextFill(Color.RED);
+            statusLabel.setText("Select an algorithm");
         } else {
             // Setup Simulation
             this.simulation = identifySelection(algoComboBox.getSelectionModel().getSelectedItem());
             ((Runnable) this.simulation).runSimulation();
             this.total = this.simulation.FrameRecord.size();
             System.out.println("Total for the FrameRecord: " + this.total);
-            messageLabel1.setTextFill(Color.BLACK);
-            messageLabel1.setText("Generated sample set");
+            statusLabel.setTextFill(Color.BLACK);
+            statusLabel.setText("Generated sample set");
             algoComboBox.setDisable(true);
             sampleSizeSlider.setDisable(true);
             sampleBoundSlider.setDisable(true);
@@ -74,7 +72,7 @@ public class Controller implements Initializable {
             this.frameBuffer = this.simulation.FrameRecord.get(position - 1);
             paintChart(this.frameBuffer);
             paintProgress(this.total, true);
-            messageLabel2.setText("Frame position " + position + " of " + total);
+            messageLabel.setText("Frame position " + position + " of " + total);
         }
     }
 
@@ -90,18 +88,18 @@ public class Controller implements Initializable {
             this.frameBuffer = this.simulation.FrameRecord.get(position - 1);
             paintChart(this.frameBuffer);
             paintProgress(this.total, false);
-            messageLabel2.setText("Frame position " + position + " of " + total);
+            messageLabel.setText("Frame position " + position + " of " + total);
         }
     }
 
     @FXML
     public void nextButtonClicked(Event event) {
-        if((position + 1) <= this.total) {
+        if ((position + 1) <= this.total) {
             position++;
             this.frameBuffer = this.simulation.FrameRecord.get(position - 1);
             paintChart(this.frameBuffer);
             paintProgress(this.total, true);
-            messageLabel2.setText("Frame position " + position + " of " + total);
+            messageLabel.setText("Frame position " + position + " of " + total);
         }
     }
 
@@ -120,7 +118,7 @@ public class Controller implements Initializable {
         this.simulationChart.getData().clear();
         int counter = 0;
 
-        for (int value : input){
+        for (int value : input) {
             XYChart.Series currentSeries = new XYChart.Series();
             currentSeries.getData().add(new XYChart.Data(Integer.toString(counter), value));
             this.simulationChart.getData().addAll(currentSeries);
@@ -161,9 +159,9 @@ public class Controller implements Initializable {
         this.simulation = null;
         this.simulationChart.setTitle("");
         this.simulationChart.getData().clear();
-        messageLabel1.setTextFill(Color.BLACK);
-        messageLabel1.setText("Simulation Reset");
-        messageLabel2.setTextFill(Color.BLACK);
-        messageLabel2.setText("Ready For Data");
+        this.statusLabel.setTextFill(Color.BLACK);
+        statusLabel.setText("Simulation Reset");
+        messageLabel.setTextFill(Color.BLACK);
+        messageLabel.setText("Ready For Data");
     }
 }
