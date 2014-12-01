@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import org.apache.commons.lang3.StringUtils;
@@ -28,7 +29,7 @@ public class Controller implements Initializable {
     @FXML
     public Button resetButton;
     @FXML
-    public BarChart simulationChart;
+    public BarChart<Number, Number> simulationChart;
     @FXML
     public ProgressBar frameProgressBar;
     @FXML
@@ -42,14 +43,11 @@ public class Controller implements Initializable {
 
     private Integer[] frameBuffer;
     private Algorithm simulation;
-    private CategoryAxis xAxis;
-    private NumberAxis yAxis;
     private int position = 1;
     private int total;
 
     @Override
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-
     }
 
     @FXML
@@ -72,6 +70,9 @@ public class Controller implements Initializable {
             generateButton.setDisable(true);
 
             // Setup Chart
+            this.simulationChart.setTitle(this.simulation.Name);
+            this.frameBuffer = this.simulation.FrameRecord.get(position - 1);
+            paintChart(this.frameBuffer);
             paintProgress(this.total, true);
             messageLabel2.setText("Frame position " + position + " of " + total);
         }
@@ -86,6 +87,8 @@ public class Controller implements Initializable {
     public void previousButtonClicked(Event event) {
         if ((position - 1) > 0) {
             position--;
+            this.frameBuffer = this.simulation.FrameRecord.get(position - 1);
+            paintChart(this.frameBuffer);
             paintProgress(this.total, false);
             messageLabel2.setText("Frame position " + position + " of " + total);
         }
@@ -95,6 +98,8 @@ public class Controller implements Initializable {
     public void nextButtonClicked(Event event) {
         if((position + 1) <= this.total) {
             position++;
+            this.frameBuffer = this.simulation.FrameRecord.get(position - 1);
+            paintChart(this.frameBuffer);
             paintProgress(this.total, true);
             messageLabel2.setText("Frame position " + position + " of " + total);
         }
@@ -112,7 +117,15 @@ public class Controller implements Initializable {
     }
 
     private void paintChart(Integer[] input) {
+        this.simulationChart.getData().clear();
+        int counter = 0;
 
+        for (int value : input){
+            XYChart.Series currentSeries = new XYChart.Series();
+            currentSeries.getData().add(new XYChart.Data(Integer.toString(counter), value));
+            this.simulationChart.getData().addAll(currentSeries);
+            counter++;
+        }
     }
 
     private Algorithm identifySelection(String input) {
@@ -134,19 +147,20 @@ public class Controller implements Initializable {
     }
 
     private void resetSimulation() {
+        this.position = 1;
+        this.total = 0;
         algoComboBox.getSelectionModel().clearSelection();
         sampleSizeSlider.adjustValue(0);
         sampleBoundSlider.adjustValue(0);
-        algoComboBox.setDisable(true);
+        algoComboBox.setDisable(false);
         sampleSizeSlider.setDisable(false);
         sampleBoundSlider.setDisable(false);
         generateButton.setDisable(false);
         frameProgressBar.setProgress(0);
         this.frameBuffer = null;
         this.simulation = null;
-        this.xAxis = new CategoryAxis();
-        this.yAxis = new NumberAxis();
-        this.simulationChart = new BarChart<>(xAxis, yAxis);
+        this.simulationChart.setTitle("");
+        this.simulationChart.getData().clear();
         messageLabel1.setTextFill(Color.BLACK);
         messageLabel1.setText("Simulation Reset");
         messageLabel2.setTextFill(Color.BLACK);

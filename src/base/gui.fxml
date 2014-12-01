@@ -73,12 +73,12 @@
         </SplitPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="1024.0">
             <children>
-                <BarChart fx:id="simulationChart" layoutX="27.0" layoutY="20.0" prefHeight="634.0" prefWidth="755.0">
+                <BarChart fx:id="simulationChart" legendVisible="false" animated="true" layoutX="27.0" layoutY="20.0" prefHeight="634.0" prefWidth="755.0">
                     <xAxis>
-                        <CategoryAxis prefHeight="25.0" prefWidth="698.0" side="BOTTOM" />
+                        <CategoryAxis label="Position" animated="true" prefHeight="25.0" prefWidth="698.0" side="BOTTOM" />
                     </xAxis>
                     <yAxis>
-                        <NumberAxis side="LEFT" />
+                        <NumberAxis label="Integer Value" animated="true" side="LEFT" />
                     </yAxis>
                 </BarChart>
                 <ProgressBar fx:id="frameProgressBar" layoutX="105.0" layoutY="679.0" prefHeight="18.0" prefWidth="599.0" progress="0.0" />
