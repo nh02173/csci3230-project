@@ -73,15 +73,15 @@
         </SplitPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="1292.0">
             <children>
-                <BarChart fx:id="simulationChart" animated="false" barGap="1.0" categoryGap="1.0" layoutX="27.0" layoutY="20.0" legendVisible="false" prefHeight="655.0" prefWidth="1009.0" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
+                <BarChart fx:id="simulationChart" animated="true" barGap="1.0" categoryGap="1.0" layoutX="27.0" layoutY="20.0" legendVisible="false" prefHeight="655.0" prefWidth="1009.0" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
                     <xAxis>
-                        <CategoryAxis animated="false" gapStartAndEnd="false" label="Position" prefHeight="44.0" prefWidth="677.0" side="BOTTOM">
+                        <CategoryAxis animated="true" gapStartAndEnd="false" label="Position" prefHeight="44.0" prefWidth="677.0" side="BOTTOM">
                      <tickLabelFont>
                         <Font size="11.0" />
                      </tickLabelFont></CategoryAxis>
                     </xAxis>
                     <yAxis>
-                        <NumberAxis animated="false" label="Integer Value" side="LEFT">
+                        <NumberAxis animated="true" label="Integer Value" side="LEFT">
                      <tickLabelFont>
                         <Font size="11.0" />
                      </tickLabelFont></NumberAxis>
